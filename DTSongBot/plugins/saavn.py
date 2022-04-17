@@ -24,9 +24,9 @@ async def song(client, message):
     message.from_user["id"]
     args = get_arg(message) + " " + "song"
     if args.startswith(" "):
-        await message.reply("<b>What is the song you want?</b>")
+        await message.reply("<b>මොකක්ද ඕන සිංදුව කියාම්..</b>")
         return ""
-    m = await message.reply_text("Downloading...")
+    m = await message.reply_text("ඩව්න්ලෝඩ් වෙන ගමන්...")
     try:
         r = requests.get(
             f"https://jevcplayerbot-saavndl.herokuapp.com/result/?query={args}"
@@ -40,7 +40,7 @@ async def song(client, message):
     file = wget.download(slink)
     ffile = file.replace("mp4", "m4a")
     os.rename(file, ffile)
-    await m.edit("Uploading...")
+    await m.edit("අප්ලෝඩ් වෙන ගමන්...")
     await message.reply_audio(audio=ffile, title=sname, performer=ssingers)
     os.remove(ffile)
     await m.delete()
