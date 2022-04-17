@@ -8,47 +8,62 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from DTSongBot import DTbot as app
 from DTSongBot import LOGGER
 
-pm_start_text = """
-Heya [{}](tg://user?id={}), I'm 🎧 Song Download bot  🎵
-Do /help for know my commands
-A bot by @Damantha_Jasinghe
-Updates channel @ankivectorUpdates
+START_TEXT = """
+හේ හේ හිච්චි පුතේ 😇
+දන්නවනේ ඉතින්. මම තමයි අපේ නිපුන් කොලුවගෙ ඇසිස්ටන්ට්.. ඌ දැන් පට්ට බිසී 😅 
+ඉස්සර වගේ නෙවේනෙ පුතේ දැන් වගකීම් එහෙමත් වැඩිනෙ ඒකාට 😅 
+ඉතින් පුතේ ඔය හෙල්ප් බටන් එක එබුවම විස්තරේ එයි 😇 ගහලම බලපම්කෝ.. 
+එහෙනම් හිච්චි පුතේ අපි කැපුනා 🥸
 """
 
-help_text = """
-My commands👇
-- /song <song name>: download songs via Youtube
-- /saavn <song name>: download songs via JioSaavn
-- /deezer <song name>: download songs via Deezer
-- Send youtube url to my pm for download it on audio format
-A bot by @ankivectorUpdates
+HELP_TEXT = """
+පුතේ මේ තීන්නෙ කමාන්ඩ්ස් ටික 👇
+/help
+/about
+/contact
+/website
+/social
+/github
+හේ හේ මරු හැබැයි 😎
 """
 
-@app.on_message(filters.command("start"))
-async def start(client, message):
-    chat_id = message.chat.id
-    user_id = message.from_user["id"]
-    name = message.from_user["first_name"]
-    if message.chat.type == "private":
-        btn = InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        text="Updates channel", url="https://t.me/ankivectorUpdates"
-                    ),
-                    InlineKeyboardButton(
-                        text="Support Group", url="https://t.me/AnkiSupport_Official"
-                    )
-                ]
-            ]
-        )
-    else:
-        btn = None
-    await message.reply(pm_start_text.format(name, user_id), reply_markup=btn)
+START_STICKER = "CAACAgIAAxkBAAEIpNJiWuv1eyICxhrO5S4rW1GtPlgzhAAChBgAAup12UryWtFUKpG2fyQE"
+Help_STICKER = "CAACAgIAAxkBAAEIpNViWuwery3UKAP_XoGcSKD3mwbcmgAC1BgAAn-z2UosweD7BFw4eCQE"
 
-@app.on_message(filters.command("help"))
-async def start(client, message):
-    await message.reply(help_text)
+START_BUTTON = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('𝑹𝒆𝒑𝒐', url='https://github.com/Lasindu248/Assistant-Bot'),
+        InlineKeyboardButton('𝑰𝒏𝒃𝒐𝒙',url='https://t.me/NiupunDinujaya')
+        ]]
+)
+
+
+HELP_BUTTON = InlineKeyboardMarkup(
+        [[
+        InlineKeyboardButton('𝑰𝒏𝒃𝒐𝒙', url='https://t.me/NiupunDinujaya'),
+        InlineKeyboardButton('𝑹𝒆𝒑𝒐',url='https://github.com/Lasindu248/Assistant-Bot')
+        ]]
+)
+
+@app.on_message(filters.private & filters.command(["start"]))
+async def start(bot, update):
+    await update.reply_photo(
+        START_STICKER,
+        caption=START_TEXT,
+        reply_markup=START_BUTTON,
+        parse_mode=ParseMode.MARKDOWN,
+        quote=True
+)
+
+@app.on_message(filters.private & filters.command(["help"]))
+async def start(bot, update):
+    await update.reply_photo(
+        HELP_STICKER,
+        caption=HELP_TEXT,
+        reply_markup=HELP_BUTTON,
+        parse_mode=ParseMode.MARKDOWN,
+        quote=True
+)   
 
 app.start()
 LOGGER.info("DTSongBot is online.")
