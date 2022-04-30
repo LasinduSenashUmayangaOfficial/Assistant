@@ -63,7 +63,37 @@ async def start(bot, update):
         reply_markup=HELP_BUTTON,
         parse_mode=ParseMode.MARKDOWN,
         quote=True
-)   
+) 
+
+@app.on_message(filters.private & filters.command(["help"]))
+async def start(bot, update):
+    await update.reply_photo(
+        HELP_STICKER,
+        caption=HELP_TEXT,
+        reply_markup=HELP_BUTTON,
+        parse_mode=ParseMode.MARKDOWN,
+        quote=True
+) 
+
+@app.on_message(filters.private & filters.command(["help"]))
+async def start(bot, update):
+    await update.reply_photo(
+        HELP_STICKER,
+        caption=HELP_TEXT,
+        reply_markup=HELP_BUTTON,
+        parse_mode=ParseMode.MARKDOWN,
+        quote=True
+) 
+
+@app.on_message(filters.private & filters.command(["help"]))
+async def start(bot, update):
+    await update.reply_photo(
+        HELP_STICKER,
+        caption=HELP_TEXT,
+        reply_markup=HELP_BUTTON,
+        parse_mode=ParseMode.MARKDOWN,
+        quote=True
+) 
 
 app.start()
 LOGGER.info("DTSongBot is online.")
